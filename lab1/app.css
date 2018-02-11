@@ -1,0 +1,16 @@
+.flex-container {
+  	display: flex;
+}
+
+.generator {
+  	border-width: thin;
+  	border-style: solid;
+  	margin: 1EM;
+  	max-width: 10EM;
+}
+
+.boxed {
+    margin: 1EM;
+  	display:flex;
+  	justify-content: center;
+}
