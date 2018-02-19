@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
+	<script>
+    window.incrementalGame = {
+        state: {
+            counter: 0
+        }
+    };
+</script>
+
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="app.css">
+	<script type="text/javascript" src="app.js"></script>
+
 	<title>Incremental Game</title>
 </head>
 
@@ -15,13 +27,13 @@
 			Family farm needs to sell corn. </br>
 			Pick the corn and sell it all. </br>
 			Hire workers and machines to speed up process. </br>
-			Profit! 
+			Profit!
 		</p>
 	</div>
 
 	</br>
-	<center class="Total">Total Corn: 0</center>
-	<center> <button id='pick'>Pick!</button> </center>
+	<center class="Total">Total Corn: <var id="numb">0</var></center>
+	<center> <button id="pick">Pick!</button> </center>
 
 	<div class="boxed">
 		<div class="generator">
@@ -43,7 +55,7 @@
 			</br>
 			<div class="desc">Hire a robot version of your uncles.</div>
 			</br>
-			<center> <button class="butt">50 Hire!</button> <center> 
+			<center> <button class="butt">50 Hire!</button> <center>
 			</br>
 			<p>5/60</p>
 		</div>
@@ -60,59 +72,5 @@
 			<p>25/60</p>
 		</div>
 	</div>
-
-	<script>
-	    window.incrementalGame =
-	    {
-	        state:
-	        {
-	            counter: 0
-	        }
-	    };
-
-	    // PubSub is single object for publish data to multiple subscribers
-		class PubSub
-		{
-		    constructor ()
-		    {
-		        this.subscribers = [];
-		    }
-
-		    // subscribe allows a new subscriber to listen for changes by providing
-		    // callback function in the parameter
-		    subscribe (fn)
-		    {
-		        this.subscribers.push(fn);
-		    }
-
-		    // one can publish any data to subscribers
-		    publish (data)
-		    {
-		        this.subscribers.forEach(subscriber =>
-		        {
-		            subscriber(data);
-		        });
-		    }
-		}
-
-		const pubSub = new PubSub();
-
-		pubSub.subscribe(data =>
-		{
-		    console.log(data);
-		});
-
-		// pubSub.publish('Hello world!');
-
-		document.querySelector('#pick').onclick = function ()
-		{
-			pubSub.publish('Hello world!');
-			window.counter++;
-			console.log(counter);
-		};
-
-
-	</script>
-
-</body>
+	</body>
 </html>
