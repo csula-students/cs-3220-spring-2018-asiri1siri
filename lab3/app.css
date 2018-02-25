@@ -1,0 +1,64 @@
+h1 {
+	font:50px Hughs, Serif;"
+}
+
+h3 {
+	display: inline;
+	font:22px Garamond, Serif;
+}
+
+p {
+   	margin: 0;
+    padding: 0;
+    font:20px Garamond, Serif;
+}
+
+#pick {
+	font:26px Garamond, Serif;
+	color: #000000;
+	font-size: 20px;
+	padding: 10px 20px 10px 20px
+  	justify-content: center;
+  	margin: 0 auto;
+}
+
+.butt {
+	font:26px Garamond, Serif;
+	color: #000000;
+	font-size: 20px;
+	padding: 10px 20px 10px 20px;
+}
+
+.quant {
+	display: inline;
+	text-align: right;
+  	float: right;
+}
+
+.desc {
+	font:18px Garamond, Serif;
+}
+
+.Total {
+	font:50px Garamond, Serif;
+}
+
+.textbox {
+	height:auto;
+	width:auto;
+	border:5px solid #ccc;
+	font:26px Garamond, Serif;
+	overflow:auto;
+}
+
+.generator {
+  	border:5px solid #ccc;
+  	margin: 1EM;
+  	max-width: 10EM;
+  	overflow:auto;
+}
+
+.boxed {
+  	display:flex;
+  	justify-content: center;
+}

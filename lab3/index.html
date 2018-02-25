@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="app.css">
+	
+
+	<title>Incremental Game</title>
+</head>
+
+<body>
+	<component-example></component-example>
+	<h1 align="center">Corn Clicker</h1>
+	<!–– Fixed errors and made changes based on LAB01 comments ––>
+
+	<div class="textbox">
+		<p>
+			Family farm needs to sell corn. </br>
+			Pick the corn and sell it all. </br>
+			Hire workers and machines to speed up process. </br>
+			Profit!
+		</p>
+	</div>
+
+	</br>
+	<center class="Total">Total Corn: <var id="numb">0</var></center>
+	<center> <button id="pick">Pick!</button> </center>
+
+	<div class="boxed">
+		<div class="generator">
+			<h3>Farmer</h3>
+			<div class="quant">100</div>
+			</br>
+			</br>
+			<div class="desc">Force your old uncles to work for you.</div>
+			</br>
+			<center> <button class="butt">10 Hire!</button> <center>
+			</br>
+			<p>1/60</p>
+		</div>
+
+		<div class="generator">
+			<h3>Robo-Farmer</h3>
+			<div class="quant">100</div>
+			</br>
+			</br>
+			<div class="desc">Hire a robot version of your uncles.</div>
+			</br>
+			<center> <button class="butt">50 Hire!</button> <center>
+			</br>
+			<p>5/60</p>
+		</div>
+
+		<div class="generator">
+			<h3>Tractor</h3>
+			<div class="quant">100</div>
+			</br>
+			</br>
+			<div class="desc">Try the CornPicker3000.</div>
+			</br>
+			<center> <button class="butt">250 Hire!</button> <center>
+			</br>
+			<p>25/60</p>
+		</div>
+	</div>
+	</body>
+	<script src="dest/app.bundle.js"></script>
+</html>
