@@ -4,7 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="app.css">
-	
+	<script>
+    window.incrementalGame = {
+        state: {
+            counter: 0
+        }
+    };
+    </script>
 
 	<title>Incremental Game</title>
 </head>
@@ -65,5 +71,12 @@
 		</div>
 	</div>
 	</body>
+	<script type="text/javascript">
+    var cornGen = document.querySelector('#button_mine').addEventListener('click', function(){
+      pubSub.publish(1);
+      document.querySelector('#rss_amt').innerHTML = window.incrementalGame.state.counter;
+    });
+    </script>
+	
 	<script src="dest/app.bundle.js"></script>
 </html>
