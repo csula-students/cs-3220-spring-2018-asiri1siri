@@ -1,0 +1,17 @@
+Theme:
+# Corn Clicker
+
+Resource:
+* Corn
+
+Generators:
+* Farm Boy
+* Farmer
+* Robo-Farmer
+* Tractor
+
+Story:
+* Family farm needs to sell corn. 
+* Pick corn and sell on click.
+* Hire workers and machines to speed up process.
+* Profit!
