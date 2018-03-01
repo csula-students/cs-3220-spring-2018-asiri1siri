@@ -2,7 +2,12 @@
 <html lang="en">
 
 <head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="app.css">
+	<title>Corn Picker</title>
+</head>
 
+<body>
 	<script>
     window.incrementalGame = {
         state: {
@@ -11,21 +16,8 @@
     };
 	</script>
 
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="app.css">
-	<script type="text/javascript" src="app.js"></script>
-
-	<title>Incremental Game</title>
-</head>
-
-<body>
-	<script src="dest/app.bundle.js"></script>
-	
-
 	<h1 align="center">Corn Clicker</h1>
-	<!–– Fixed errors and made changes based on LAB01 comments ––>
-
-	<div class="textbox">
+	<div class="story">
 		<p>
 			Family farm needs to sell corn. </br>
 			Pick the corn and sell it all. </br>
@@ -35,16 +27,21 @@
 	</div>
 
 	</br>
-	<center class="Total">Total Corn: <var id="numb">0</var></center>
-	<center> <button id="pick">Pick!</button> </center>
-
+	<div class="clickGen">
+		<center>
+			<p>Total Corn:</p>
+			<p id="cornNum">0</p>
+			<button type="button" name="click to pick" id="pick">Pick!</button>
+		</center>
+	</div>
+	
 	<div class="boxed">
 		<div class="generator">
 			<h3>Farmer</h3>
 			<div class="quant">100</div>
 			</br>
 			</br>
-			<div class="desc">Force your old uncles to work for you.</div>
+			<div class="description">Force your old uncles to work for you.</div>
 			</br>
 			<center> <button class="butt">10 Hire!</button> <center>
 			</br>
@@ -56,7 +53,7 @@
 			<div class="quant">100</div>
 			</br>
 			</br>
-			<div class="desc">Hire a robot version of your uncles.</div>
+			<div class="description">Hire a robot version of your uncles.</div>
 			</br>
 			<center> <button class="butt">50 Hire!</button> <center>
 			</br>
@@ -68,12 +65,20 @@
 			<div class="quant">100</div>
 			</br>
 			</br>
-			<div class="desc">Try the CornPicker3000.</div>
+			<div class="description">Try the CornPicker3000.</div>
 			</br>
 			<center> <button class="butt">250 Hire!</button> <center>
 			</br>
 			<p>25/60</p>
 		</div>
 	</div>
-	</body>
+	
+	<script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript">
+    var pickDaCorn = document.querySelector('#pick').addEventListener('click', function(){
+      pubSub.publish(1);
+      document.querySelector('#cornNum').innerHTML = window.incrementalGame.state.counter;
+    });
+    </script>
+</body>
 </html>

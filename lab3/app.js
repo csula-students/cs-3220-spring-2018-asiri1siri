@@ -1,11 +1,24 @@
+// Fixed Errors from LAB 01 and LAB 02 Comments //
+// Now has working PubSub //
 
-var x = window.incrementalGame.state.counter;
-var y = document.getElementById("numb")+1;
-window.onload = function()
-  {
-    document.querySelector('#pick').onclick = function ()
-    {
-      console.log(x++);
-      document.getElementById("numb").innerHTML = y++;
+class PubSub {
+    constructor () {
+        this.subscribers = [];
     }
-  }
+    subscribe (fn) {
+        this.subscribers.push(fn);
+    }
+
+    publish (data) {
+        this.subscribers.forEach(subscriber => {
+            subscriber(data);
+        });
+    }
+}
+
+const pubSub = new PubSub();
+
+pubSub.subscribe(data => {
+    console.log(data);
+    window.incrementalGame.state.counter += data;
+});

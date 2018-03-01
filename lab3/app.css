@@ -35,15 +35,11 @@ p {
   	float: right;
 }
 
-.desc {
+.description {
 	font:18px Garamond, Serif;
 }
 
-.Total {
-	font:50px Garamond, Serif;
-}
-
-.textbox {
+.story {
 	height:auto;
 	width:auto;
 	border:5px solid #ccc;
