@@ -2,21 +2,26 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="app.css">
+
 	<script>
     window.incrementalGame = {
         state: {
             counter: 0
         }
     };
-    </script>
+	</script>
+
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="app.css">
+	<script type="text/javascript" src="app.js"></script>
 
 	<title>Incremental Game</title>
 </head>
 
 <body>
-	<component-example></component-example>
+	<script src="dest/app.bundle.js"></script>
+	
+
 	<h1 align="center">Corn Clicker</h1>
 	<!–– Fixed errors and made changes based on LAB01 comments ––>
 
@@ -71,12 +76,4 @@
 		</div>
 	</div>
 	</body>
-	<script type="text/javascript">
-    var cornGen = document.querySelector('#button_mine').addEventListener('click', function(){
-      pubSub.publish(1);
-      document.querySelector('#rss_amt').innerHTML = window.incrementalGame.state.counter;
-    });
-    </script>
-	
-	<script src="dest/app.bundle.js"></script>
 </html>
