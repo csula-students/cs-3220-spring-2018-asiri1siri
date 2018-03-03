@@ -22,3 +22,8 @@ pubSub.subscribe(data => {
     console.log(data);
     window.incrementalGame.state.counter += data;
 });
+
+var pickDaCorn = document.querySelector('#pick').addEventListener('click', function(){
+      pubSub.publish(1);
+      document.querySelector('#cornNum').innerHTML = window.incrementalGame.state.counter;
+    });
