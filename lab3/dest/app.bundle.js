@@ -171,7 +171,32 @@ function main() {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [],
+		generators: [{
+			"type": "Generator",
+			"name": "Farmer",
+			"description": "Force your old uncles to work for you",
+			"rate": 1,
+			"quantity": 0,
+			"baseCost": 10,
+			"unlockValue": 10
+		}, {
+			"type": "Generator",
+			"name": "Robo-Farmer",
+			"description": "Hire a robot version of your uncles",
+			"rate": 5,
+			"quantity": 0,
+			"baseCost": 50,
+			"unlockValue": 50
+		}, {
+			"type": "Generator",
+			"name": "Tractor",
+			"description": "Try the CornPicker3000",
+			"rate": 25,
+			"quantity": 0,
+			"baseCost": 250,
+			"unlockValue": 250
+		}],
+
 		story: []
 	};
 
@@ -739,7 +764,26 @@ function reducer(state, action) {
 		case 'EXAMPLE_MUTATION':
 			state.example = action.payload;
 			return state;
+
+		case 'CORN_PICK':
+			state.counter += action.payload;
+			return state;
+
+		case 'BUY_GENERATOR':
+			state.generators.forEach(element => {
+				if (element.name === action.payload.name) {
+					const generator = new Generator(element);
+					const cost = generator.getCost();
+					if (state.counter >= cost) {
+						state.counter -= cost;
+						element.quantity++;
+					}
+					console.log(action);
+				}
+			});
+
 		default:
+			console.log(action);
 			return state;
 	}
 }
