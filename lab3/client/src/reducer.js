@@ -1,35 +1,25 @@
-export default function reducer (state, action) {
-	switch (action.type) {
-	case 'EXAMPLE_MUTATION':
+import constants from './constants';
+
+var index = 0;
+
+export default function reducer (state, action) 
+{
+	switch (action.type) 
+	{
+	case constants.actions.EXAMPLE_MUTATION:
 		state.example = action.payload;
 		return state;
-
-	case 'CORN_PICK':
-		state.counter += action.payload;
+	case constants.actions.CORN_PICK:
+		state.counter ++;
 		return state;
 
-	case 'BUY_GENERATOR':
-		state.generators.forEach((element) =>{
-		if(element.name === action.payload.name)
-		{
-			const generator = new Generator(element);
-			const cost =  generator.getCost();
-			if(state.counter >= cost)
-			{
-				state.counter -= cost;
-				element.quantity++;
-			}
-			console.log(action);
-		}
-
-		});
-
+	case constants.actions.BUY_GENERATOR:
+		state.example = action.payload;
+		return state;
 
 
 
 	default:
-		console.log(action);
 		return state;
 	}
 }
-

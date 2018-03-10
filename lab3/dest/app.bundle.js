@@ -82,23 +82,23 @@ var _reducer = __webpack_require__(6);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _button = __webpack_require__(7);
+var _button = __webpack_require__(8);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _counter = __webpack_require__(8);
+var _counter = __webpack_require__(9);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _example = __webpack_require__(9);
+var _example = __webpack_require__(10);
 
 var _example2 = _interopRequireDefault(_example);
 
-var _generator = __webpack_require__(10);
+var _generator = __webpack_require__(11);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _storyBook = __webpack_require__(11);
+var _storyBook = __webpack_require__(12);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
 
@@ -759,37 +759,54 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = reducer;
+
+var _constants = __webpack_require__(7);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var index = 0;
+
 function reducer(state, action) {
 	switch (action.type) {
-		case 'EXAMPLE_MUTATION':
+		case _constants2.default.actions.EXAMPLE_MUTATION:
+			state.example = action.payload;
+			return state;
+		case _constants2.default.actions.CORN_PICK:
+			state.counter++;
+			return state;
+
+		case _constants2.default.actions.BUY_GENERATOR:
 			state.example = action.payload;
 			return state;
 
-		case 'CORN_PICK':
-			state.counter += action.payload;
-			return state;
-
-		case 'BUY_GENERATOR':
-			state.generators.forEach(element => {
-				if (element.name === action.payload.name) {
-					const generator = new Generator(element);
-					const cost = generator.getCost();
-					if (state.counter >= cost) {
-						state.counter -= cost;
-						element.quantity++;
-					}
-					console.log(action);
-				}
-			});
-
 		default:
-			console.log(action);
 			return state;
 	}
 }
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	growthRatio: 0.05,
+	actions: {
+		EXAMPLE: 'EXAMPLE_MUTATION',
+		CORN_PICK: 'CORN_PICK',
+		BUY_GENERATOR: 'BUY_GENERATOR'
+	}
+};
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -814,7 +831,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -850,7 +867,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -898,7 +915,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -924,7 +941,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
