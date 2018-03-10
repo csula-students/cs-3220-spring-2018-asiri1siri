@@ -1,6 +1,6 @@
 // Fixed Errors from LAB 01 and LAB 02 Comments //
 // Now has working PubSub //
-
+/*
 class PubSub {
     constructor () {
         this.subscribers = [];
@@ -27,3 +27,4 @@ var pickDaCorn = document.querySelector('#pick').addEventListener('click', funct
       pubSub.publish(1);
       document.querySelector('#cornNum').innerHTML = window.incrementalGame.state.counter;
     });
+    */

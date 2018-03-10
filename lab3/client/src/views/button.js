@@ -1,13 +1,37 @@
+import constants from '../constants';
+
+const action = {
+	type: constants.actions.CORN_PICK,
+	payload: {
+		quantity: 1
+		}
+	};
+
 export default function (store) {
 	return class ButtonComponent extends window.HTMLElement {
 		constructor () {
 			super();
 			this.store = store;
+		}
 
-			this.onStateChange = this.handleStateChange.bind(this);
+		connectedCallback () 
+		{
+			this.innerHTML = `<button type="button" name="click to pick" id="pick">Pick!</button>`;
+			this.addEventListener('click', () => {
+				this.store.dispatch({
+					type: constants.actions.CORN_PICK,
+					payload: 
+					{
+						quantity: 1
+					}
+				}
+			);
+			});
+		}
 
-			// TODO: add click event to increment counter
-			// hint: use "store.dispatch" method (see example component)
+		disconnectedCallback () {
+			console.log('ExampleComponent#onDisconnectedCallback');
+			this.store.unsubscribe(this.onStateChange);
 		}
 	};
 }
