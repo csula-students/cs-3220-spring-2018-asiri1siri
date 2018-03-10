@@ -13,10 +13,12 @@ export default function reducer (state, action)
 		state.counter ++;
 		return state;
 
+
+	// my TODO ******************************** //
 	case constants.actions.BUY_GENERATOR:
 		state.example = action.payload;
 		return state;
-
+	// **************************************** //
 
 
 	default:

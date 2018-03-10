@@ -777,9 +777,12 @@ function reducer(state, action) {
 			state.counter++;
 			return state;
 
+		// my TODO ******************************** //
 		case _constants2.default.actions.BUY_GENERATOR:
 			state.example = action.payload;
 			return state;
+		// **************************************** //
+
 
 		default:
 			return state;
