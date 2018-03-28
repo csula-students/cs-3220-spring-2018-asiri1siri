@@ -48,6 +48,12 @@ export default class Store {
 	unsubscribe (listener) {
 		this.listeners = this.listeners.filter(l => l != listener);
 	}
+
+	// adding generator functuon to link between generator and store
+	addGenerator(generator)
+	{
+		this.__state.generators.push(generator);
+	}
 }
 
 /**

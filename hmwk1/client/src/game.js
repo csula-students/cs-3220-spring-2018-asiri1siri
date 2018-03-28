@@ -1,5 +1,6 @@
+import constants from './constants';
 // default interval as 1 second
-const interval = 1000;
+const interval = 1000; // every 1 second (1000 milliseconds)
 
 /**
  * loop is main loop of the game, which will be executed once every second (

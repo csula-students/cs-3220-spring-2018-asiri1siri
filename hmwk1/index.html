@@ -5,9 +5,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="app.css">
 	<title>Corn Picker</title>
-</head>
 
-<body>
 	<script>
     window.incrementalGame = {
         state: {
@@ -15,15 +13,14 @@
         }
     };
 	</script>
+</head>
 
+<body>
 	<h1 align="center">Corn Clicker</h1>
 	<div class="story">
-		<p>
-			Family farm needs to sell corn. </br>
-			Pick the corn and sell it all. </br>
-			Hire workers and machines to speed up process. </br>
-			Profit!
-		</p>
+		<game-story-book>
+			<!--> bind to story-book.js <-->
+		</game-story-book>
 	</div>
 
 	</br>
@@ -37,44 +34,15 @@
 	</div>
 	
 	<div class="boxed">
-		<div class="generator" data-id="0">
-			<h3>Farmer</h3>
-			<div class="quant">100</div>
-			</br>
-			</br>
-			<div class="description">Force your old uncles to work for you.</div>
-			</br>
-			<center> <button class="butt">10 Hire!</button> <center>
-			</br>
-			<p>1/60</p>
-		</div>
+		<!--> bind with generator.js via data id # <-->
 
-		<div class="generator" data-id="1">
-			<h3>Robo-Farmer</h3>
-			<div class="quant">100</div>
-			</br>
-			</br>
-			<div class="description">Hire a robot version of your uncles.</div>
-			</br>
-			<center> <button class="butt">50 Hire!</button> <center>
-			</br>
-			<p>5/60</p>
-		</div>
-
-		<div class="generator" data-id="2">
-			<h3>Tractor</h3>
-			<div class="quant">100</div>
-			</br>
-			</br>
-			<div class="description">Try the CornPicker3000.</div>
-			</br>
-			<center> <button class="butt">250 Hire!</button> <center>
-			</br>
-			<p>25/60</p>
-		</div>
+		<game-generator class="generator-box" data-id="0"></game-generator>
+		<game-generator class="generator-box" data-id="1"></game-generator>
+		<game-generator class="generator-box" data-id="2"></game-generator>
+		
 	</div>
 	
-	<!-- <script type="text/javascript" src="app.js"></script> -->
+	<script src="app.js"></script>
 	<script src="dest/app.bundle.js"></script>
 </body>
 </html>

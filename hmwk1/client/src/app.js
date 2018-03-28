@@ -77,8 +77,53 @@ function main () {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [],
-		stories: []
+		generators: [{
+			"type": "Generator",
+			"name": "Farmer",
+			"description": "Force your old uncles to work for you.",
+			"rate": 1,
+			"quantity": 0,
+			"baseCost": 10,
+			"unlockValue": 10
+		},
+		{
+			"type": "Generator",
+			"name": "Robo-Farmer",
+			"description": "Hire a robot version of your uncles.",
+			"rate": 5,
+			"quantity": 0,
+			"baseCost": 50,
+			"unlockValue": 50
+		},
+		{
+			"type": "Generator",
+			"name": "Tractor",
+			"description": "Try the CornPicker3000.",
+			"rate": 25,
+			"quantity": 0,
+			"baseCost": 250,
+			"unlockValue": 250
+		}
+	],
+		story: [{
+			name: 'Backpain',
+			description: 'Put your back into it!',
+			triggeredAt: 10,
+			state: 'hidden'
+		},
+		{
+			name: 'Robo-Backpain',
+			description: 'Back to work you stupid robot',
+			triggeredAt: 50,
+			state: 'hidden'
+		},
+		{
+			name: 'Overkill',
+			description: 'Vroom!',
+			triggeredAt: 250,
+			state: 'hidden'
+		},
+	]
 	};
 
 	// initialize store

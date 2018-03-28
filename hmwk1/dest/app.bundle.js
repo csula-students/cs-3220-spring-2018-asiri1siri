@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,54 +70,35 @@
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	growthRatio: 0.05,
-	actions: {
-		EXAMPLE: 'EXAMPLE_MUTATION',
-		CORN_PICK: 'CORN_PICK',
-		BUY_GENERATOR: 'BUY_GENERATOR'
-	}
-};
+__webpack_require__(1);
 
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+var _game = __webpack_require__(4);
 
-"use strict";
-
-
-__webpack_require__(2);
-
-var _game = __webpack_require__(5);
-
-var _store = __webpack_require__(6);
+var _store = __webpack_require__(5);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _reducer = __webpack_require__(7);
+var _reducer = __webpack_require__(6);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _button = __webpack_require__(8);
+var _button = __webpack_require__(7);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _counter = __webpack_require__(9);
+var _counter = __webpack_require__(8);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _example = __webpack_require__(10);
+var _example = __webpack_require__(9);
 
 var _example2 = _interopRequireDefault(_example);
 
-var _generator = __webpack_require__(11);
+var _generator = __webpack_require__(10);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _storyBook = __webpack_require__(12);
+var _storyBook = __webpack_require__(11);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
 
@@ -190,33 +171,8 @@ function main() {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [{
-			"type": "Generator",
-			"name": "Farmer",
-			"description": "Force your old uncles to work for you",
-			"rate": 1,
-			"quantity": 0,
-			"baseCost": 10,
-			"unlockValue": 10
-		}, {
-			"type": "Generator",
-			"name": "Robo-Farmer",
-			"description": "Hire a robot version of your uncles",
-			"rate": 5,
-			"quantity": 0,
-			"baseCost": 50,
-			"unlockValue": 50
-		}, {
-			"type": "Generator",
-			"name": "Tractor",
-			"description": "Try the CornPicker3000",
-			"rate": 25,
-			"quantity": 0,
-			"baseCost": 250,
-			"unlockValue": 250
-		}],
-
-		story: []
+		generators: [],
+		stories: []
 	};
 
 	// initialize store
@@ -242,7 +198,7 @@ function main() {
 }
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function(){/*
@@ -443,10 +399,10 @@ Eg.whenReady(function(){requestAnimationFrame(function(){window.WebComponents.re
 
 //# sourceMappingURL=webcomponents-lite.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 var g;
@@ -473,7 +429,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -663,7 +619,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -673,7 +629,6 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.loop = loop;
-exports.increment = increment;
 // default interval as 1 second
 const interval = 1000;
 
@@ -685,19 +640,19 @@ function loop(store) {
 	// TODO: increment counter based on the generators in the state
 	// hint: read how many "generators" in store and iterate through them to
 	//       count how many value to increment to "resource"
+	// hint: remember to change event through `store.dispatch`
 
 
 	// TODO: triggers stories from story to display state if they are passed
 	//       the `triggeredAt` points
+	// hint: use store.dispatch to send event for changing events state
+
+	// recursively calls loop method every second
 	setTimeout(loop.bind(this, store), interval);
 }
 
-function increment(state, modifier = 1) {
-	return state.counter + 1 * modifier;
-}
-
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -768,7 +723,7 @@ function deepCopy(obj) {
 }
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -778,38 +733,18 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = reducer;
-
-var _constants = __webpack_require__(0);
-
-var _constants2 = _interopRequireDefault(_constants);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var index = 0;
-
 function reducer(state, action) {
 	switch (action.type) {
-		case _constants2.default.actions.EXAMPLE_MUTATION:
+		case 'EXAMPLE_MUTATION':
 			state.example = action.payload;
 			return state;
-		case _constants2.default.actions.CORN_PICK:
-			state.counter++;
-			return state;
-
-		// my TODO ******************************** //
-		case _constants2.default.actions.BUY_GENERATOR:
-			state.example = action.payload;
-			return state;
-		// **************************************** //
-
-
 		default:
 			return state;
 	}
 }
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -824,42 +759,17 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-		}
 
-		connectedCallback() {
-			this.innerHTML = `<button type="button" name="click to pick" id="pick">Pick!</button>`;
-			this.addEventListener('click', () => {
-				this.store.dispatch({
-					type: _constants2.default.actions.CORN_PICK,
-					payload: {
-						quantity: 1
-					}
-				});
-			});
-		}
+			this.onStateChange = this.handleStateChange.bind(this);
 
-		disconnectedCallback() {
-			console.log('ExampleComponent#onDisconnectedCallback');
-			this.store.unsubscribe(this.onStateChange);
+			// TODO: add click event to increment counter
+			// hint: use "store.dispatch" method (see example component)
 		}
 	};
 };
 
-var _constants = __webpack_require__(0);
-
-var _constants2 = _interopRequireDefault(_constants);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const action = {
-	type: _constants2.default.actions.CORN_PICK,
-	payload: {
-		quantity: 1
-	}
-};
-
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -874,20 +784,17 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
+			// TODO: render counter inner HTML based on the store state
 
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
 		handleStateChange(newState) {
 			console.log('CounterComponent#stateChange', this, newState);
-			this.innerHTML = `<p>Total Corn: </p> 
-							<p id="cornNum">${newState.counter}</p>`;
+			// TODO: update inner HTML based on the new state
 		}
 
 		connectedCallback() {
-			this.innerHTML = `<p>Total Corn: </p> 
-							<p id="cornNum">0</p>`;
-
 			this.store.subscribe(this.onStateChange);
 		}
 
@@ -898,7 +805,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -946,7 +853,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -961,6 +868,7 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
+			this.onStateChange = this.handleStateChange.bind(this);
 
 			// TODO: render generator initial view
 
@@ -968,11 +876,21 @@ exports.default = function (store) {
 
 			// TODO: add click event
 		}
+
+		handleStateChange(newState) {}
+
+		connectedCallback() {
+			this.store.subscribe(this.onStateChange);
+		}
+
+		disconnectedCallback() {
+			this.store.unsubscribe(this.onStateChange);
+		}
 	};
 };
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -987,6 +905,7 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
+			// TODO: initial DOM rendering of story itself
 
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
