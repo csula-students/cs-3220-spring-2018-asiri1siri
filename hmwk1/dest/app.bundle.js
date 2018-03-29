@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,35 +70,55 @@
 "use strict";
 
 
-__webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	growthRatio: 0.05,
+	actions: {
+		BUY_GENERATOR: 'BUY_GENERATOR',
+		EXAMPLE: 'EXAMPLE_MUTATION',
+		INCREMENT: 'INCREMENT',
+		CHECK_STORY: 'CHECK_STORY'
+	}
+};
 
-var _game = __webpack_require__(4);
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
-var _store = __webpack_require__(5);
+"use strict";
+
+
+__webpack_require__(2);
+
+var _game = __webpack_require__(5);
+
+var _store = __webpack_require__(6);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _reducer = __webpack_require__(6);
+var _reducer = __webpack_require__(7);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _button = __webpack_require__(7);
+var _button = __webpack_require__(8);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _counter = __webpack_require__(8);
+var _counter = __webpack_require__(9);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _example = __webpack_require__(9);
+var _example = __webpack_require__(10);
 
 var _example2 = _interopRequireDefault(_example);
 
-var _generator = __webpack_require__(10);
+var _generator = __webpack_require__(11);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _storyBook = __webpack_require__(11);
+var _storyBook = __webpack_require__(12);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
 
@@ -171,8 +191,47 @@ function main() {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [],
-		stories: []
+		generators: [{
+			"type": "Generator",
+			"name": "Farmer",
+			"description": "Force your old uncles to work for you.",
+			"rate": 1,
+			"quantity": 0,
+			"baseCost": 10,
+			"unlockValue": 10
+		}, {
+			"type": "Generator",
+			"name": "Robo-Farmer",
+			"description": "Hire a robot version of your uncles.",
+			"rate": 5,
+			"quantity": 0,
+			"baseCost": 50,
+			"unlockValue": 50
+		}, {
+			"type": "Generator",
+			"name": "Tractor",
+			"description": "Try the CornPicker3000.",
+			"rate": 25,
+			"quantity": 0,
+			"baseCost": 250,
+			"unlockValue": 250
+		}],
+		story: [{
+			name: 'Backpain',
+			description: 'Put your back into it!',
+			triggeredAt: 10,
+			state: 'hidden'
+		}, {
+			name: 'Robo-Backpain',
+			description: 'Back to work you stupid robot',
+			triggeredAt: 50,
+			state: 'hidden'
+		}, {
+			name: 'Overkill',
+			description: 'Vroom!',
+			triggeredAt: 250,
+			state: 'hidden'
+		}]
 	};
 
 	// initialize store
@@ -198,7 +257,7 @@ function main() {
 }
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function(){/*
@@ -399,10 +458,10 @@ Eg.whenReady(function(){requestAnimationFrame(function(){window.WebComponents.re
 
 //# sourceMappingURL=webcomponents-lite.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)))
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 var g;
@@ -429,7 +488,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -619,7 +678,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -629,8 +688,15 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.loop = loop;
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // default interval as 1 second
-const interval = 1000;
+const interval = 1000; // every 1 second (1000 milliseconds)
 
 /**
  * loop is main loop of the game, which will be executed once every second (
@@ -652,7 +718,7 @@ function loop(store) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -711,6 +777,11 @@ class Store {
 	unsubscribe(listener) {
 		this.listeners = this.listeners.filter(l => l != listener);
 	}
+
+	// adding generator functuon to link between generator and store
+	addGenerator(generator) {
+		this.__state.generators.push(generator);
+	}
 }
 
 exports.default = Store; /**
@@ -723,7 +794,7 @@ function deepCopy(obj) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -744,7 +815,7 @@ function reducer(state, action) {
 }
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -765,11 +836,35 @@ exports.default = function (store) {
 			// TODO: add click event to increment counter
 			// hint: use "store.dispatch" method (see example component)
 		}
+
+		connectedCallback() {
+			this.innerHTML = `<button id='pick'>Pick!</button>`;
+
+			this.addEventListener('click', () => {
+				this.store.dispatch(action);
+			});
+		}
+
+		disconnectedCallback() {
+			this.store.unsubscribe(this.onStateChange);
+		}
+
 	};
 };
 
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const action = {
+	type: _constants2.default.actions.INCREMENT,
+	payload: 1
+};
+
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -792,9 +887,11 @@ exports.default = function (store) {
 		handleStateChange(newState) {
 			console.log('CounterComponent#stateChange', this, newState);
 			// TODO: update inner HTML based on the new state
+			this.innerHTML = `<p>Total Corn: <span id="cornNum">${newState.counter}</span></p>`;
 		}
 
 		connectedCallback() {
+			this.innerHTML = `<p>Total Corn: <span id="cornNum">0</span></p>`;
 			this.store.subscribe(this.onStateChange);
 		}
 
@@ -804,8 +901,14 @@ exports.default = function (store) {
 	};
 };
 
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -852,8 +955,14 @@ exports.default = function (store) {
 	};
 };
 
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -889,8 +998,14 @@ exports.default = function (store) {
 	};
 };
 
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -923,6 +1038,12 @@ exports.default = function (store) {
 		}
 	};
 };
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ })
 /******/ ]);

@@ -1,3 +1,5 @@
+import constants from '../constants';
+
 export default function (store) {
 	return class GeneratorComponent extends window.HTMLElement {
 		constructor () {

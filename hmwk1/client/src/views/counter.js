@@ -1,3 +1,5 @@
+import constants from '../constants';
+
 export default function (store) {
 	return class CounterComponent extends window.HTMLElement {
 		constructor () {
@@ -8,12 +10,16 @@ export default function (store) {
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
-		handleStateChange (newState) {
+		handleStateChange (newState) 
+		{
 			console.log('CounterComponent#stateChange', this, newState);
 			// TODO: update inner HTML based on the new state
+			this.innerHTML = `<p>Total Corn: <span id="cornNum">${newState.counter}</span></p>`;
 		}
 
-		connectedCallback () {
+		connectedCallback () 
+		{
+			this.innerHTML = `<p>Total Corn: <span id="cornNum">0</span></p>`;
 			this.store.subscribe(this.onStateChange);
 		}
 

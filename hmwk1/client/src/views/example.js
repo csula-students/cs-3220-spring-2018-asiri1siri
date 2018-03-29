@@ -1,3 +1,5 @@
+import constants from '../constants';
+
 // Dependency Injection pattern to inject store into the ExampleComponent
 export default function (store) {
 	return class ExampleComponent extends window.HTMLElement {

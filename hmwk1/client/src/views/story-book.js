@@ -1,3 +1,5 @@
+import constants from '../constants';
+
 export default function (store) {
 	return class StoryBookComponent extends window.HTMLElement {
 		constructor () {
