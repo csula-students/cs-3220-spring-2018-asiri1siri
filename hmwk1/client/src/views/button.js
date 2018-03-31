@@ -17,7 +17,7 @@ export default function (store)
 
 		connectedCallback()
 		{
-			this.innerHTML = `<button id='pick'>Pick!</button>`;
+			this.innerHTML = `<button id="pick">Pick!</button>`;
 			
 			this.addEventListener('click', () => {
 				this.store.dispatch(action);
@@ -32,6 +32,8 @@ export default function (store)
 	};
 }
 
+
+// ACTION OF BUTTON, TO INCREMENT BY ONE
 const action = {
 			type: constants.actions.INCREMENT,
 			payload: 1

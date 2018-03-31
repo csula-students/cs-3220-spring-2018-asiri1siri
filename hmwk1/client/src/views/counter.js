@@ -6,7 +6,6 @@ export default function (store) {
 			super();
 			this.store = store;
 			// TODO: render counter inner HTML based on the store state
-
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
@@ -14,12 +13,12 @@ export default function (store) {
 		{
 			console.log('CounterComponent#stateChange', this, newState);
 			// TODO: update inner HTML based on the new state
-			this.innerHTML = `<p>Total Corn: <span id="cornNum">${newState.counter}</span></p>`;
+			this.innerHTML = `<p>Total Corn: </p> <p id="cornNum">${newState.counter}</p>`;
 		}
 
 		connectedCallback () 
 		{
-			this.innerHTML = `<p>Total Corn: <span id="cornNum">0</span></p>`;
+			this.innerHTML = `<p>Total Corn: </p> <p id="cornNum">0</span></p>`;
 			this.store.subscribe(this.onStateChange);
 		}
 

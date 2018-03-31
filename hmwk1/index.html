@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="app.css">
@@ -19,11 +18,6 @@
 	<h1 align="center">Corn Clicker</h1>
 	<div class="story">
 		<game-story-book>
-
-
-
-
-
 		</game-story-book>
 	</div>
 
@@ -31,25 +25,23 @@
 	
 	<div class="clickGen">
 		<center>	
-			<button type="button" name="click to pick" id="pick">Pick!</button>
+			<game-button>
+				
+			</game-button>
 		</center>
 	</div>
 	
-	<div class="boxed">
+	</br>
 
+	<div class="generator-box">
 
-
-
-
-
-
-		<game-generator class="generator-box" data-id="0"></game-generator>
-		<game-generator class="generator-box" data-id="1"></game-generator>
-		<game-generator class="generator-box" data-id="2"></game-generator>
+		<game-generator data-id="0"></game-generator>
+		<game-generator data-id="1"></game-generator>
+		<game-generator data-id="2"></game-generator>
 		
 	</div>
 	
-	<script src="app.js"></script>
 	<script src="dest/app.bundle.js"></script>
+
 </body>
 </html>
