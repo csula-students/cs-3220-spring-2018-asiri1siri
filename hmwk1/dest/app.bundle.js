@@ -102,23 +102,23 @@ var _reducer = __webpack_require__(7);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _button = __webpack_require__(8);
+var _button = __webpack_require__(10);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _counter = __webpack_require__(9);
+var _counter = __webpack_require__(11);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _example = __webpack_require__(10);
+var _example = __webpack_require__(12);
 
 var _example2 = _interopRequireDefault(_example);
 
-var _generator = __webpack_require__(11);
+var _generator = __webpack_require__(13);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _storyBook = __webpack_require__(12);
+var _storyBook = __webpack_require__(14);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
 
@@ -708,10 +708,22 @@ function loop(store) {
 	//       count how many value to increment to "resource"
 	// hint: remember to change event through `store.dispatch`
 
+	var counter = 0;
+	store.state.generators.forEach(element => {
+		counter += element.rate * element.quantity;
+	});
+
+	store.dispatch({
+		type: _constants2.default.actions.INCREMENT, payload: increment
+	});
 
 	// TODO: triggers stories from story to display state if they are passed
 	//       the `triggeredAt` points
 	// hint: use store.dispatch to send event for changing events state
+
+	store.dispatch({
+		type: _constants2.default.actions.CHECK_STORY
+	});
 
 	// recursively calls loop method every second
 	setTimeout(loop.bind(this, store), interval);
@@ -779,6 +791,7 @@ class Store {
 	}
 
 	// adding generator functuon to link between generator and store
+	// for all generators TODO!
 	addGenerator(generator) {
 		this.__state.generators.push(generator);
 	}
@@ -804,11 +817,58 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = reducer;
+
+var _generator = __webpack_require__(8);
+
+var _generator2 = _interopRequireDefault(_generator);
+
+var _story = __webpack_require__(9);
+
+var _story2 = _interopRequireDefault(_story);
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function reducer(state, action) {
 	switch (action.type) {
-		case 'EXAMPLE_MUTATION':
+		// BUY GENERATOR CASE
+		case _constants2.default.actions.BUY_GENERATOR:
+			state.generators.forEach(element => {
+				if (element.name === action.payload.name) {
+					const generator = new _generator2.default(element);
+					const cost = generator.getCost();
+
+					if (state.counter >= cost) {
+						state.counter -= state.counter;
+						element.quantity++;
+					}
+				}
+			});
+			return state;
+
+		// ON CLICK INCREMEMT STATE
+		case _constants2.default.actions.INCREMENT:
+			state.counter += action.payload;
+			return state;
+
+		// STORY STATE
+		case _constants2.default.actions.CHECK_STORY:
+			state.story.forEach(element => {
+				let story = new _story2.default(element);
+				if (story.isUnlockedYet(state.counter)) {
+					element.state = "visible";
+				}
+			});
+
+		// EXAMPLE CASE
+		case _constants2.default.actions.EXAMPLE:
 			state.example = action.payload;
 			return state;
+
+		// DEFAULT
 		default:
 			return state;
 	}
@@ -816,6 +876,111 @@ function reducer(state, action) {
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Generator {
+	/**
+  * Create a new generator based on the meta object passing in
+  * @constructor
+  * @param {object} meta - meta object for constructing generator
+  */
+	constructor(meta) {
+		this.type = meta.type;
+		this.name = meta.name;
+		this.description = meta.description;
+		this.rate = meta.rate;
+		this.quantity = meta.quantity;
+		this.baseCost = meta.baseCost;
+		this.unlockValue = meta.unlockValue;
+	}
+
+	/**
+  * getCost computes cost exponentially based on quantity (as formula below)
+  * xt = x0(1 + r)^t
+  * which 
+  * xt is the value of x with t quantity
+  * x0 is base value
+  * r is growth ratio (see constants.growthRatio)
+  * t is the quantity
+  * @return {number} the cost of buying another generator
+  */
+	getCost() {
+		// TODO: implement the function according to doc above
+		var myCost = this.baseCost * Math.pow(1 + _constants2.default.growthRatio, this.quantity);
+		return Math.round(myCost * 100) / 100;
+	}
+
+	/**
+  * generate computes how much this type of generator generates -
+  * rate * quantity
+  * @return {number} how much this generator generates
+  */
+	generate() {
+		// TODO: implement based on doc above
+		var myRate = this.rate * this.quantity;
+		return myRate;
+	}
+}
+exports.default = Generator;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+class Story {
+	/**
+  * create a new story based on the meta passed in argument
+  * @constructor
+  * @param {object} meta - the meta data for story
+  */
+	constructor(meta) {
+		this.name = meta.name;
+		this.description = meta.description;
+		this.triggeredAt = meta.triggeredAt;
+		this.state = meta.state;
+	}
+
+	/**
+  * isUnlockYet checks if this story is ready to be unlocked yet
+  * @param {number} value - the resource value at the moment
+  * @return {boolean} if this story is unlockable
+  */
+	isUnlockYet(value) {
+		// TODO: implement based on doc
+		return this.triggeredAt <= value;
+	}
+
+	/**
+  * unlock simply unlock the story to visible state
+  */
+	unlock() {
+		// TODO: change the story state to "visible"
+		this.state = 'visible';
+	}
+}
+exports.default = Story;
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -864,7 +1029,7 @@ const action = {
 };
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -908,7 +1073,7 @@ var _constants2 = _interopRequireDefault(_constants);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -962,7 +1127,7 @@ var _constants2 = _interopRequireDefault(_constants);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1005,7 +1170,7 @@ var _constants2 = _interopRequireDefault(_constants);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

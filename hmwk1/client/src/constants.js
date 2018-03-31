@@ -1,6 +1,8 @@
-export default {
+export default 
+{
 	growthRatio: 0.05,
-	actions: {
+	actions: 
+	{
 		BUY_GENERATOR: 'BUY_GENERATOR',
 		EXAMPLE: 'EXAMPLE_MUTATION',
 		INCREMENT: 'INCREMENT',

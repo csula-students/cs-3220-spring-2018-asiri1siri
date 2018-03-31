@@ -50,6 +50,7 @@ export default class Store {
 	}
 
 	// adding generator functuon to link between generator and store
+	// for all generators TODO!
 	addGenerator(generator)
 	{
 		this.__state.generators.push(generator);

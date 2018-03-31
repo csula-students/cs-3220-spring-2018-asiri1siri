@@ -30,7 +30,7 @@ export default class Generator {
 	{
 		// TODO: implement the function according to doc above
 		var myCost = (this.baseCost * Math.pow(1 + constants.growthRatio, this.quantity))
-		return myCost;
+		return Math.round(myCost * 100) / 100;
 	}
 
 	/**
@@ -41,6 +41,7 @@ export default class Generator {
 	generate () 
 	{
 		// TODO: implement based on doc above
-		return this.rate * this.quantity;
+		var myRate = this.rate * this.quantity;
+		return myRate;
 	}
 }
