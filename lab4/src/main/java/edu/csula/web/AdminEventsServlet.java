@@ -40,7 +40,23 @@ public class AdminEventsServlet extends HttpServlet
 		//out.println("<h1>Hello events servlet!</h1>");
 		//render HTML
 		String html = "<link rel='stylesheet' type='text/css\' href='" + request.getContextPath() + "/app.css' />";
+		
 		html += "<h1>Incremental Game Framework</h1>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
 
 	}
 
